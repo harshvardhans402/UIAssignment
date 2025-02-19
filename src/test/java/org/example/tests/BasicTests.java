@@ -76,7 +76,8 @@ public class BasicTests {
 
         test.log(Status.INFO,"Getting contact details");
         System.out.println("Fetching contact details");
-        homePage.getContactDetials();
+        String details=homePage.getContactDetials();
+        test.log(Status.INFO,details);
     }
 
 
@@ -124,18 +125,20 @@ public class BasicTests {
         Assert.assertTrue(cookies.isEmpty());
         test.log(Status.INFO,"Cookies deleted");
 
-
     }
 
 
 
 
     @Test
-    public void checkProductResult(){
+    public void checkFlow(){
 
         test.log(Status.INFO,"Going to Login Page");
         System.out.println("Going to Login page");
+
+
         homePage.goToLogin(); //Go To Login Page
+        DriverUtility.takeSnapShot(driver,"Screenshots/loginpage.png");
         test.log(Status.INFO,"Logging In");
         System.out.println("Logging In");
         loginPage.login("test1user","testuser"); // Login
@@ -147,10 +150,12 @@ public class BasicTests {
         System.out.println("Searching Product ");
         homePage.searchProduct("t-shirt"); // Search product from the search bar
 
+        DriverUtility.takeSnapShot(driver,"Screenshots/searchedProduct.png");
+
         String productTitle= searchResultPage.goToResultIndex(1);// go to specific product
         test.log(Status.INFO,"Clicked on a product link");
         System.out.println("Clicked on a product link");
-
+        DriverUtility.takeSnapShot(driver,"Screenshots/productPage.png");
         String addedProductTitle=productPage.addToCart();// add product to cart
         try {
             Assert.assertTrue(productTitle.equalsIgnoreCase(addedProductTitle), "Visited wrong product");
@@ -160,6 +165,7 @@ public class BasicTests {
         catch(AssertionError e){
             test.fail("test failed due to Assertion Error: "+e.getMessage());
         }
+        DriverUtility.takeSnapShot(driver,"Screenshots/AddedToCart.png");
 
         String cartProducts=cartPage.checkOutCart();//go to cart and checkout
         try {
@@ -170,7 +176,7 @@ public class BasicTests {
         catch(AssertionError e){
             test.fail("test failed due to Assertion Error: "+e.getMessage());
         }
-
+        DriverUtility.takeSnapShot(driver,"Screenshots/checkout.png");
         checkoutPage.confirmOrder();// confirm the order
         String successUrl="https://automationteststore.com/index.php?rt=checkout/success";
         wait.until(ExpectedConditions.urlToBe(successUrl));
@@ -181,6 +187,7 @@ public class BasicTests {
         catch(AssertionError e){
             test.fail("test failed due to Assertion Error: "+e.getMessage());
         }
+        DriverUtility.takeSnapShot(driver,"Screenshots/orderplaced.png");
         homePage.logOut();// logout
 
         System.out.println("Logged Out");

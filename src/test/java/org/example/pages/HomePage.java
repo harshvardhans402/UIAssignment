@@ -43,15 +43,17 @@ public class HomePage extends BasePage{
     }
 
 
-    public void getContactDetials(){
+    public String getContactDetials(){
 
         System.out.println("Printing Contact Details");
-        System.out.println("Phone: "+getText(contactDetails.get(0)));
-        System.out.println("Email: "+getText(contactDetails.get(1)));
+
+        String str="Email: "+getText(contactDetails.get(0))+ "\nPhone: "+ getText(contactDetails.get(0));
+
         click(contactUsLink);
         WebElement address=driver.findElement(By.xpath("//address"));
-        System.out.println("Address: "+getText(address));
-
+        str=str+"\nAddress: "+getText(address);
+        System.out.println(str);
+        return str;
 
     }
 
