@@ -85,10 +85,12 @@ public class BasicTests {
 
     @Test
     public void goToCart(){
+        test.log(Status.INFO,"clicked on cart link");
         homePage.goToCart();
         String url=driver.getCurrentUrl();
         try {
             Assert.assertEquals(url, "https://automationteststore.com/index.php?rt=checkout/cart");
+            test.log(Status.PASS,"Cart URL verified");
         }
         catch(AssertionError e){
             test.fail("Test Failed due to Assertion Error: "+e.getMessage());

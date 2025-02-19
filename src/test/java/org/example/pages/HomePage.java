@@ -47,7 +47,7 @@ public class HomePage extends BasePage{
 
         System.out.println("Printing Contact Details");
 
-        String str="Email: "+getText(contactDetails.get(0))+ "\nPhone: "+ getText(contactDetails.get(0));
+        String str="Email: "+getText(contactDetails.get(0))+ "\nPhone: "+ getText(contactDetails.get(1));
 
         click(contactUsLink);
         WebElement address=driver.findElement(By.xpath("//address"));
